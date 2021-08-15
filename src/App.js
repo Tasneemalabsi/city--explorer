@@ -23,17 +23,15 @@ class App extends React.Component {
     })
     let URL = ` https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_MY_KEY}&q=${this.state.location}&format=json`;
 
-    let imgURL= ` https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_MY_KEY}&center= ${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15&size=<width>x<height>&format=png&maptype=<MapType>&markers=icon:<icon>| ${this.state.cityData.lat},${this.state.cityData.lon}&markers=icon:<icon>|${this.state.cityData.lat},${this.state.cityData.lon}`;
     
-
     let locationData =  await axios.get(URL);
-    // let locationImg = await axios.get(imgURL);
+    let imgURL= ` https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_MY_KEY}&center= ${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15&format=png&maptype=roadmap&markers=icon| ${this.state.cityData.lat},${this.state.cityData.lon}`;
     this.setState({
       cityData: locationData.data[0],
       cityImg: imgURL,
       show: true
     })
-    console.log(this.state.cityData.lat);
+    // console.log(this.state.cityData.lat);
   }
 
   render() {
