@@ -3,6 +3,8 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,12 +12,12 @@ class App extends React.Component {
       cityData: {},
       location: '',
       cityImg:'',
-      show: false
+      show: false,
+      // loading:true
     }
   }
 
   accessAPI = async (e) => {
-    // console.log('inside get location function')
     e.preventDefault();
 
     await this.setState({
@@ -37,8 +39,10 @@ class App extends React.Component {
     this.setState({
       cityImg: imgURL
     })
-    // console.log(this.state.cityData.lat);
+    
   }
+
+  
 
   render() {
     return (
@@ -55,6 +59,8 @@ class App extends React.Component {
 
           }
           {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
+          
+          
 
       </div>
     )
