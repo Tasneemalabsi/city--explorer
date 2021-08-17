@@ -43,7 +43,7 @@ class App extends React.Component {
     })
     let myCityInfo = await axios.get(`${process.env.REACT_APP_SERVER_LINK}/weather?searchquery=${this.state.location}`);
     this.setState({
-      myData:myCityInfo
+      myData:myCityInfo.data
     })
     
   }
@@ -63,10 +63,18 @@ class App extends React.Component {
 
 {this.state.show && <p>for {this.state.location}, the Latitude is {this.state.cityData.lat} and the Longitude is {this.state.cityData.lon}
  </p> 
- && <p>{this.state.myData}</p>
 
           }
           {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
+          {this.state.show && this.state.myData.map(item=>
+          {return(
+            <div>
+            <p>{'date: '+ item.date}</p>
+            <p>{'description: '+item.desc}</p>
+            </div>
+          )}
+          )}
+  
           
           
 
