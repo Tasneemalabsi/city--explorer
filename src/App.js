@@ -66,12 +66,16 @@ class App extends React.Component {
 
           }
           {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
-          {this.state.show && this.state.myData.map(item=>
+          {this.state.show && this.state.myData.map((item,index)=>
           {return(
-            <div>
+            
+            
+              <Card.Body key={index}>
+                
             <p>{'date: '+ item.date}</p>
             <p>{'description: '+item.desc}</p>
-            </div>
+            </Card.Body>
+            
           )}
           )}
   
