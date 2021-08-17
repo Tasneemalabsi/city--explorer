@@ -13,7 +13,8 @@ class App extends React.Component {
       location: '',
       cityImg:'',
       show: false,
-      myData : []
+      myData : [],
+      movieInfo:[]
     }
   }
 
@@ -41,10 +42,15 @@ class App extends React.Component {
       cityImg: imgURL,
      
     })
-    let myCityInfo = await axios.get(`${process.env.REACT_APP_SERVER_LINK}/weather?searchquery=${this.state.location}`);
+    let myCityInfo = await axios.get(`${process.env.REACT_APP_SERVER_LINK}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}&key=${process.env.MY_KEY}`);
     this.setState({
       myData:myCityInfo.data
     })
+    
+    axios.get(`${process.env.REACT_APP_SERVER_LINK}/movies?api_key=${process.env.MOVIES_KEY}&query=${this.state.location}`).then(movieURL=>{
+    this.setState({
+      movieInfo:movieURL.data
+    })})
     
   }
 
@@ -73,7 +79,26 @@ class App extends React.Component {
               <Card.Body key={index}>
                 
             <p>{'date: '+ item.date}</p>
-            <p>{'description: '+item.desc}</p>
+            <p>{'description: '+item.description}</p>
+            </Card.Body>
+            
+          )}
+          )}
+          
+          {this.state.show &&  this.state.movieInfo.map((item,index)=>
+          {return(
+            
+            
+              <Card.Body key={index}>
+                
+                {console.log(item)}
+            <p>{'title: '+ item.title}</p>
+            <p>{'overview: '+item.overview}</p>
+            <p>{'average_votes: '+item.average_votes}</p>
+            <p>{'total_votes: '+ item.total_votes}</p>
+            <p>{'image_URL: '+ item.image_url}</p>
+            <p>{'popularity: '+item.popularity}</p>
+            <p>{'released on : '+ item.released_on}</p>
             </Card.Body>
             
           )}
