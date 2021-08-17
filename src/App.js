@@ -13,7 +13,7 @@ class App extends React.Component {
       location: '',
       cityImg:'',
       show: false,
-      // loading:true
+      myData : []
     }
   }
 
@@ -27,6 +27,7 @@ class App extends React.Component {
 
     
     let locationData =  await axios.get(URL);
+    
 
     this.setState({
       cityData: locationData.data[0],
@@ -37,7 +38,12 @@ class App extends React.Component {
     let imgURL= ` https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_MY_KEY}&center= ${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15&format=png&maptype=roadmap&markers=icon| ${this.state.cityData.lat},${this.state.cityData.lon}`;
     
     this.setState({
-      cityImg: imgURL
+      cityImg: imgURL,
+     
+    })
+    let myCityInfo = await axios.get(`${process.env.REACT_APP_SERVER_LINK}/weather?searchquery=${this.state.location}`);
+    this.setState({
+      myData:myCityInfo
     })
     
   }
@@ -55,7 +61,9 @@ class App extends React.Component {
 </form>
 
 
-{this.state.show && <p>for {this.state.location}, the Latitude is {this.state.cityData.lat} and the Longitude is {this.state.cityData.lon} </p>
+{this.state.show && <p>for {this.state.location}, the Latitude is {this.state.cityData.lat} and the Longitude is {this.state.cityData.lon}
+ </p> 
+ && <p>{this.state.myData}</p>
 
           }
           {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
