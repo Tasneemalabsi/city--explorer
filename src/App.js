@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
+import Weather from './components/Weather';
+import Movies from './components/movies'; 
 
 
 
@@ -51,10 +53,6 @@ class App extends React.Component {
     this.setState({
       movieInfo:movieURL.data
     })})
-    // let movieURL= await axios.get(`${process.env.REACT_APP_SERVER_LINK}/movies?api_key=${process.env.MOVIES_KEY}&query=${this.state.location}`);
-    // this.setState({
-    //   m
-    // })
     
   }
 
@@ -74,41 +72,13 @@ class App extends React.Component {
 
 
 {this.state.show && <p>for {this.state.location}, the Latitude is {this.state.cityData.lat} and the Longitude is {this.state.cityData.lon}
- </p> 
-
-          }
-          {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
-          {this.state.show && this.state.myData.map((item,index)=>
-          {return(
-            
-            
-              <Card.Body key={index}>
-                
-            <p>{'date: '+ item.date}</p>
-            <p>{'description: '+item.description}</p>
-            </Card.Body>
-            
-          )}
-          )}
+ </p>}
           
-          {this.state.show &&  this.state.movieInfo.map((item,index)=>
-          {return(
-            
-            
-              <Card.Body key={index}>
-                
-                {console.log(item)}
-            <p>{'title: '+ item.title}</p>
-            <p>{'overview: '+item.overview}</p>
-            <p>{'average_votes: '+item.average_votes}</p>
-            <p>{'total_votes: '+ item.total_votes}</p>
-            <img src={item.image_url} alt="" title='' />
-            <p>{'popularity: '+item.popularity}</p>
-            <p>{'released on : '+ item.released_on}</p>
-            </Card.Body>
-            
-          )}
-          )}
+          {this.state.show &&  <Card.Img  src={this.state.cityImg} alt='' title='' style={{ width: '18rem', padding:'20px' }}/> }
+          
+          {this.state.show && <Weather myData={this.state.myData}/>}
+          
+          {this.state.show && <Movies movieInfo={this.state.movieInfo}/> }
   
           
           
