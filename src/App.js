@@ -51,8 +51,14 @@ class App extends React.Component {
     this.setState({
       movieInfo:movieURL.data
     })})
+    // let movieURL= await axios.get(`${process.env.REACT_APP_SERVER_LINK}/movies?api_key=${process.env.MOVIES_KEY}&query=${this.state.location}`);
+    // this.setState({
+    //   m
+    // })
     
   }
+
+  
 
   
 
@@ -96,7 +102,7 @@ class App extends React.Component {
             <p>{'overview: '+item.overview}</p>
             <p>{'average_votes: '+item.average_votes}</p>
             <p>{'total_votes: '+ item.total_votes}</p>
-            <p>{'image_URL: '+ item.image_url}</p>
+            <img src={item.image_url} alt="" title='' />
             <p>{'popularity: '+item.popularity}</p>
             <p>{'released on : '+ item.released_on}</p>
             </Card.Body>
